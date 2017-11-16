@@ -1,5 +1,5 @@
 ---
-title: Measuring Success in Education - The Role of Effort on the Test Itself
+title: Measuring Success in Education
 date: 2017-11-14
 link: http://www.nber.org/papers/w24004
 tags: 
