@@ -1,0 +1,16 @@
+# main links links
+main:
+  - title: "About"
+    url: /about/
+
+  - title: "Posts"
+    url: /post-archive/
+    
+  - title: "Linked"
+    url: /linked-archive/
+    
+  - title: "Book Notes"
+    url: /book-notes/
+    
+  - title: "Resume"
+    url: /files/spurrier_resume.pdf

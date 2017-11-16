@@ -1,0 +1,44 @@
+{% include base_path %}
+
+{% if post.content %}
+  {% capture content %}{{ post.content }}{% endcapture %}
+{% endif %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+
+<div id="main" role="main>
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      {% if post.link %}
+        <a href="{{ base_path }}{{ post.url }}" rel="permalink"><font color="#3c3e40">{{ title }}</a> <a href="{{ post.link }}"><font color="#3c3e40">{% if post.link contains "overcast" %}
+          <i class="fa fa-rss" aria-hidden="true" title="directlink">
+        {% elsif post.link contains "amazon" %} 
+          <i class="fa fa-book" aria-hidden="true" title="directlink">
+        {% else %}
+          <i class="fa fa-link" aria-hidden="true" title="directlink">
+        {% endif %}</i><span class="sr-only"></span></a>
+        
+        
+      {% else %}
+        <a href="{{ base_path }}{{ post.url }}" rel="permalink"><font color="#3c3e40">{{ title }}</a>
+      {% endif %}
+    </h2>
+    
+    {% if post.read_time %}
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
+    {% endif %}
+    
+    
+    <section>{{ content }}</section>
+  
+  </article>
+  
+  
+</div>
