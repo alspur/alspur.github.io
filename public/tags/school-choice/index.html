@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<meta name="generator" content="Hugo 0.30.2" />
+
+
+<title>School Choice - @alspur</title>
+<meta property="og:title" content="School Choice - @alspur">
+
+
+
+  
+
+
+
+
+
+<link href="/tags/school-choice/index.xml" rel="alternate" type="application/rss+xml" title="@alspur" />
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/alspur_logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/projects/">Projects</a></li>
+    
+    <li><a href="/archive/">Archive</a></li>
+    
+    <li><a href="/files/spurrier_resume.pdf/">Resume</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+    
+    
+     <h2 class="archive-title">February 2, 2017</h2>
+
+    
+    <article class="article">
+      <a href="/school-choice-via-u-haul/" class="archive-item-link">School choice via U-Haul</a>
+      
+       
+     
+     <div class="article-content">
+        
+     
+
+<p>Earlier this week, <a href="http://www.twitter.com/thinkschools">Alex Hernandez</a> argued that 43 percent of children in the United States are benefiting from school choice. <a href="https://www.the74million.org/article/hernandez-devos-should-tell-her-critics-all-kids-deserve-school-choice-just-like-theirs-have">In The 74, he wrote</a>:</p>
+
+<blockquote>
+<p>School districts assign children to public schools based on where they live. Then, the world’s largest game of musical chairs begins. The families of 24 million students find ways around their forced assignments to get the schools they want for their kids.</p>
+
+<p>The biggest school choice group is families who move to a new neighborhood to change their assigned school. They represent an estimated 8.2 million students, about one third of all school choosers. To be clear: The most popular way to choose a school in America is to literally move your family.</p>
+</blockquote>
+
+<p>This led me to wonder: what kinds of families are able to choose a school for their child by moving? Thankfully, Hernandez shows his work in <a href="https://medium.com/@thinkschools/the-74-million-hernandez-devos-should-tell-her-critics-all-kids-deserve-school-choice-just-like-21d250c48e0f#.r6scv7i9l">a Medium post</a>, revealing the specific NCES reports he used to generate his estimates. His data comes from the <a href="https://nces.ed.gov/nhes/dataproducts.asp">NCES National Household Education Surveys Program</a>, specifically the Parent and Family Involvement in Education (PFI) survey.</p>
+
+<p>Earlier this month, I was at an <a href="http://sdp.cepr.harvard.edu">SDP workshop</a> and heard from <a href="https://twitter.com/alex_j_bowers">Alex Bowers</a> on the kinds of research you can do with publicly-available education data, including NCES surveys.</p>
+
+<p>I took this coincidence as a sign to take the advice of one Alex (Bowers) and extend the work of another Alex (Hernandez). All of the analysis below was performed using this publicly available data and <a href="https://github.com/alspur/nces_household_survey">the code is available on GitHub</a>.</p>
+
+<h2 id="who-are-the-movers">Who are the movers?</h2>
+
+<p>Moving isn’t cheap. Families with more financial resources are more able to absorb the costs associated with moving to a neighborhood with a more desirable zoned school. Generally, as household income rises, students are more likely to have moved to their neighborhood specifically for the school. The following graph shows how frequently parents responding to the NCES survey decided to move neighborhoods for a better school, broken down by household income.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/inc_move_pct.png" alt="inc_move_pct" /></p>
+
+<p>The racial demographics of each income bracket vary. Higher-income movers are less racially diverse than lower-income movers.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/race_inc_move.png" alt="race_in_move" /></p>
+
+<p>Splitting the chart above by racial group, we can see how likely a family is to move given their race and their incomes. We can see that the groups most likely to move neighborhoods for better schools are white and Asian families with a six-figure household income.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/race_inc_move_pct.png" alt="race_in_move_pct" /></p>
+
+<h2 id="what-are-the-most-popular-destinations-for-movers">What are the most popular destinations for movers?</h2>
+
+<p>The public NCES survey data doesn’t include precise location data, but it does provide the <strong>type</strong> of neighborhood where these families live. It’s not surprising to see that most movers head for the suburbs. For clarification on what separates a “suburb, large” from a “town, distant” check out <a href="https://nces.ed.gov/surveys/ruraled/definitions.asp">their definitions on the NCES website</a>.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/zip_move.png" alt="zip_move" /></p>
+
+<p>This chart shows the volume of movers by their chosen destination and their household income. It’s pretty clear that affluent families overwhelmingly choose to move to either suburbs or “rural, fringe” areas, defined as:</p>
+
+<blockquote>
+<p>Census-defined rural territory that is less than or equal to 5 miles from an urbanized area, as well as rural territory that is less than or equal to 2.5 miles from an urban cluster</p>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/inc_move_zip.png" alt="inc_move_zip" /></p>
+
+<p>For lower-income families, suburbs are still a popular destination, but they are much more likely to choose cities or towns.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/inc_move_zip_pct.png" alt="inc_move_zip_pct" /></p>
+
+<p>Mover destinations by race reveal a consistent preference for suburbs, with varying degrees of preference for other destination types.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/zip_race_move_pct.png" alt="zip_race_move_pct" /></p>
+
+<p>I’ve only scratched the surface of what we can learn from this particular survey. It has a lot more information I’d like to investigate, including parents’ views on school quality, if their students are in their first-choice school, and more. The survey has also been administered in 2007, 2005, and 2003, so it would be interesting to track some of these patterns on both sides of the Great Recession.</p>
+
+<p>Publicly-available education data is pretty cool.</p>
+
+      
+    </div>
+      </article> 
+      <hr>
+    
+    
+    
+     <h2 class="archive-title">February 2, 2015</h2>
+
+    
+    <article class="article">
+      <a href="/outdated-funding-systems-are-limiting-options-for-families-in-connecticut./" class="archive-item-link">Outdated funding systems are limiting options for families in Connecticut.</a>
+      
+       
+     
+     <div class="article-content">
+        
+     
+
+<h3 id="the-growth-of-school-choice-in-connecticut-1995-2015">The Growth of School Choice in Connecticut, 1995-2015</h3>
+
+<p>For years, families in Connecticut demanded more public school options for their children. Over the last two decades, state funding for magnet and charter schools grew significantly.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/choicefunding/master/choicegrants.png" alt="choiceGrants" /></p>
+
+<p>Even with this level of growth, thousands still end up unable to attend <a href="http://articles.courant.com/2012-04-24/news/hc-school-lottery-0424-20120423_1_open-choice-open-three-new-magnet-choice-or-magnet-schools">magnet schools</a> or <a href="http://www.sde.ct.gov/sde/lib/sde/pdf/equity/charter/report_on_the_operation_of_charter_schools.pdf">charter schools</a> due to limited capacity. Wouldn&rsquo;t it seem reasonable that lawmakers would work to expand the number of public school options available to families?</p>
+
+<p>Unfortunately, Connecticut may be heading in the opposite direction. Some lawmakers are considering putting a moratorium on any further expansion of <a href="http://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&amp;bill_num=HB6414&amp;which_year=2015">magnet schools</a> and <a href="http://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&amp;bill_num=HB6003&amp;which_year=2015">charter schools</a>.</p>
+
+<hr />
+
+<h3 id="choice-funding-in-connecticut-too-big-to-exist-as-line-items">Choice funding in Connecticut: too big to exist as line-items?</h3>
+
+<p>Simply put, the current system of funding school choice is expensive and downright Byzantine. A student can have their public education funded at least 10 different ways based on the type of school they attend.<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> As the chart below indicates, this complicated system of funding is now equivalent to more than 15% of the main grant to school districts, the Education Cost Sharing grant (ECS).</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/choicefunding/master/choiceratio.png" alt="choiceVsECS" /></p>
+
+<p>Freezing funding to schools of choice would be an easy way for legislators to avoid answering a simple question: why should more than 50,000 students have their public schools funded in different and inequitable methods?</p>
+
+<h3 id="what-s-the-solution">What&rsquo;s the solution?</h3>
+
+<p>It&rsquo;s going to be a <a href="http://ctmirror.org/2015/02/03/barnes-long-term-obligations-continue-to-squeeze-funding-for-poor-children/">lean budget year</a> with many tough short-term choices, but lawmakers need to think seriously about the future of our school finance system. I hope they keep these principles in mind:</p>
+
+<ul>
+<li>All public school students should have their public education funded by a combination of the state and by their town of residence.</li>
+<li>The ratio of state/town funding should be determined by the relative wealth of the town.</li>
+<li>A student&rsquo;s total level of funding should be determined by their learning needs.</li>
+<li>The full funding for a student should follow them to the public school of their choice.</li>
+</ul>
+
+<p>A funding system guided by these principles would benefit the state by focusing the school finance system on town wealth and student need instead of the label a public school carries. It would benefit towns by giving them a predictable level of costs - no matter what schools families choose, towns would contribute the same level of funding to their education. Most importantly, it would provide families with more choices for their children.</p>
+
+<hr />
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">As noted in a <a href="http://alspur.com/problem-with-ct-school-finance.html">previous post</a>, this was detailed in the <a href="http://www.cga.ct.gov/ed/tfs%5C20110815_Education%20Cost%20Sharing%20Task%20Force%5C20120123/Education%20Cost%20Sharing%20Task%20Force%20Final%20Report%201-23-13.pdf">ECS Task Force&rsquo;s Final Report</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+      
+    </div>
+      </article> 
+      <hr>
+    
+    
+    
+    
+    
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+            <a href = "http://www.github.com/alspur"><font color="3c3e40"><i class="fa fa-github-alt"></i></a></font>
+          </li>
+          <li>
+            <a href = "http://www.linkedin.com/alspur"><font color="3c3e40"><i class="fa fa-linkedin"></i></a></font>
+          </li>
+          <li>
+            <a href = "mailto:alex.spurrier@gmail.com"><font color="3c3e40"><i class="fa fa-envelope-o"></i></a></font>
+          </li>
+          <li>
+            <a href = "http://www.instagram.com/alspur"><font color="3c3e40"><i class="fa fa-instagram"></i></a></font>
+          </li>
+          <li>
+            <a href = "http://www.twitter.com/alspur"><font color="3c3e40"><i class="fa fa-twitter"></i></a></font>
+          </li>
+        
+            
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+    
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56149120-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+

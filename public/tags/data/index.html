@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<meta name="generator" content="Hugo 0.30.2" />
+
+
+<title>Data - @alspur</title>
+<meta property="og:title" content="Data - @alspur">
+
+
+
+  
+
+
+
+
+
+<link href="/tags/data/index.xml" rel="alternate" type="application/rss+xml" title="@alspur" />
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/alspur_logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/projects/">Projects</a></li>
+    
+    <li><a href="/archive/">Archive</a></li>
+    
+    <li><a href="/files/spurrier_resume.pdf/">Resume</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+    
+    
+     <h2 class="archive-title">June 6, 2017</h2>
+
+    
+    <article class="article">
+      <a href="/tidytext-analysis-of-podcast-transcripts/" class="archive-item-link">Tidytext analysis of podcast transcripts</a>
+      
+       
+     
+     <div class="article-content">
+        
+     <p>I listen to podcasts for several hours each day. When I wake up, I launch <a href="http://overcast.fm">Overcast</a> and listen to a podcast while I have coffee. They&rsquo;re playing my drive to work, sometimes while I work,<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> and when I&rsquo;m running my shutdown routine at night to get ready for the next day.</p>
+
+<p>I love my podcasts.</p>
+
+<p>Earlier this year, <a href="http://david-smith.org/">_DavidSmith</a> released a side project, <a href="http://podsearch.david-smith.org">Podcast Search</a>. His description of this project:</p>
+
+<blockquote>
+<p>&ldquo;I take a few podcasts and run them through automated speech-to-text, which is useless for reading, but works out to be just fine for keyword searching.&rdquo;</p>
+</blockquote>
+
+<p>It&rsquo;s a really cool site - particularity since it produces searchable quasi-transcripts for a few of my favorite podcasts:</p>
+
+<ul>
+<li><a href="http://atp.fm">Accidental Tech Podcast</a></li>
+<li><a href="http://relay.fm/cortex">Cortex</a></li>
+<li><a href="http://5by5.tv/hypercritical">Hypercritical</a></li>
+<li><a href="http://daringfireball.net/thetalkshow">The Talk Show</a></li>
+<li>and more!</li>
+</ul>
+
+<p>They aren&rsquo;t perfect, but it&rsquo;s a pretty cool tool, and it got me thinking: wouldn&rsquo;t it be cool to take that text and run it through some <a href="http://tidytextmining.com"><code>tidytext</code></a> functions?</p>
+
+<p>So I did.</p>
+
+<p>I started by scraping the raw HTML for each episode of ATP, Cortex, Hypercritical, and The Talk Show. I then did a little data cleaning to get the text from Podcast Search into <a href="http://r4ds.had.co.nz/tidy-data.html">a tidy format</a>. There are still a few episodes of ATP and Hypercritical processing through _DavidSmith&rsquo;s speech-to-text algorithm, but there&rsquo;s enough data from each podcast to do some cursory text analysis using <code>tidytext</code>.</p>
+
+<p>As of 6 June 2017, I have about 1.1 million lines of text from these four podcasts to analyze. Once I loaded the data, it was pretty easy to parse out the words spoken in each podcast using the <code>unnest_tokens()</code> function from <code>tidytext</code>.</p>
+
+<pre><code class="language-r"># load libraries
+library(tidyverse)
+library(tidytext)
+
+# load transcript data
+atp &lt;- read_rds(&quot;data/atp.rda&quot;)
+cortex &lt;- read_rds(&quot;data/cortex.rda&quot;)
+hypercritical &lt;- read_rds(&quot;data/hypercritical.rda&quot;)
+the_talk_show &lt;- read_rds(&quot;data/tts.rda&quot;)
+
+# join podcast data together
+podcasts &lt;- bind_rows(atp, cortex, hypercritical, the_talk_show)
+
+# get count of words by podcast
+podcast_words &lt;- podcasts %&gt;% 
+  unnest_tokens(word, line) %&gt;%
+  anti_join(stop_words) %&gt;%
+  count(podcast, word) %&gt;%
+  ungroup()
+</code></pre>
+
+<p>Next, I wanted to use <code>tf-idf</code> to determine which words were most important to each podcast. Not familiar with this approach? Here&rsquo;s <a href="http://tidytextmining.com/tfidf.html#term-frequency-in-jane-austens-novels">a description from the authors of the <code>tidytext</code> package</a>:</p>
+
+<blockquote>
+<p>The idea of tf-idf is to find the important words for the content of each document by decreasing the weight for commonly used words and increasing the weight for words that are not used very much in a collection or corpus of documents&hellip;</p>
+
+<p>Calculating tf-idf attempts to find the words that are important (i.e., common) in a text, but not too common.</p>
+</blockquote>
+
+<p>In other words, if one of these podcasts uses an uncommon word more than others, this approach will help identify it. Here is the code I used to do this:</p>
+
+<pre><code class="language-r"># count total words per podcast
+total_words &lt;- podcast_words %&gt;%
+  group_by(podcast) %&gt;%
+  summarise(total = sum(n))
+
+# join individual word count and total word count
+# get tf_idf by podcast
+podcast_words &lt;- left_join(podcast_words, total_words) %&gt;% 
+  bind_tf_idf(word, podcast, n)
+  
+# plot top 10 tf_idf words by podcast
+podcast_words %&gt;%  
+  group_by(podcast) %&gt;% 
+  top_n(10) %&gt;% 
+  ungroup() %&gt;% 
+  ggplot(aes(reorder(word, tf_idf), tf_idf, fill = podcast)) +
+  geom_col(show.legend=FALSE) +
+  facet_wrap(~podcast, scales = &quot;free&quot;) +
+  coord_flip() +
+  labs(x = &quot;tf-idf&quot;,
+       title = &quot;Most Important Words by Podcast&quot;,
+       subtitle = &quot;Measured by tf-idf&quot;) +
+  scale_fill_manual(values = c(&quot;blue4&quot;, &quot;grey18&quot;,
+                               &quot;palegreen4&quot;, &quot;lightsteelblue4&quot;))+
+  theme(legend.position = &quot;none&quot;,
+        axis.title.y = element_blank())
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/alspur/tidy_pod/master/figures/podcasts.png" alt="podcast plot" /></p>
+
+<p>This is a pretty interesting plot, but there&rsquo;s definitely some noise here. It&rsquo;s clear that there are some words that slipped through the <code>stop_words</code> filter (like &ldquo;dont&rdquo;) and some words that got mixed up during the speech-to-text process like (&ldquo;fd&rdquo;).</p>
+
+<p>There&rsquo;s also a lot of noise coming from each podcast&rsquo;s ad reads. I&rsquo;m sure this makes the folks at Casper, Lynda, Betterment, etc. happy, but I&rsquo;d like to know a little more about the actual content of these podcasts. Let&rsquo;s filter those words and plot again using this code:</p>
+
+<pre><code class="language-R">podcast_plot_clean &lt;- podcast_words %&gt;% 
+  arrange(desc(tf_idf)) %&gt;% 
+  filter(word != &quot;mattress&quot;) %&gt;%
+  filter(word != &quot;casper&quot;) %&gt;%
+  filter(word != &quot;betterment&quot;) %&gt;%
+  filter(word != &quot;lynda&quot;) %&gt;%
+  filter(word != &quot;5x5&quot;) %&gt;%
+  filter(word != &quot;rackspace&quot;) %&gt;%
+  filter(word != &quot;mailchimp.com&quot;) %&gt;%
+  filter(word != &quot;dont&quot;) %&gt;%
+  filter(word != &quot;tts&quot;) %&gt;%
+  filter(word != &quot;afm&quot;) %&gt;%
+  filter(word != &quot;fd&quot;) %&gt;%
+  filter(word != &quot;wealthfront&quot;) %&gt;%
+  filter(word != &quot;apron&quot;) %&gt;%
+  filter(word != &quot;cgpgrey&quot;) %&gt;%
+  mutate(word = factor(word, levels = rev(unique(word))))
+
+podcast_plot_clean %&gt;%  
+  group_by(podcast) %&gt;% 
+  top_n(10) %&gt;% 
+  ungroup() %&gt;% 
+  ggplot(aes(word, tf_idf, fill = podcast)) +
+  geom_col(show.legend=FALSE) +
+  facet_wrap(~podcast, scales = &quot;free&quot;) +
+  coord_flip() +
+  labs(x = &quot;tf-idf&quot;,
+       title = &quot;Most Important Words by Podcast&quot;,
+       subtitle = &quot;Measured by tf-idf&quot;) +
+  scale_fill_manual(values = c(&quot;blue4&quot;, &quot;grey18&quot;,
+                               &quot;palegreen4&quot;, &quot;lightsteelblue4&quot;))+
+  theme(legend.position = &quot;none&quot;,
+        axis.title.y = element_blank())
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/alspur/tidy_pod/master/figures/podcasts_clean.png" alt="clean podcast plot" /></p>
+
+<p>This plot provides a much better understanding of what makes each of these podcasts unique:</p>
+
+<ul>
+<li>ATP is clearly a very technical show. From API&rsquo;s to PHP, <a href="http://twitter.com/caseyliss">Casey</a>, <a href="http://twitter.com/marcoarment">Marco</a>, and <a href="http://twitter.com/siracusa">John</a> spend a lot of time in the weeds of technical issues. If it were one word, &ldquo;file system&rdquo; (🛎) would have been on this plot.</li>
+<li>Cortex, a show about the working habits of <a href="http://twitter.com/imyke">Myke Hurley</a> and <a href="http://twitter.com/cgpgrey">CGP Grey</a>, is well-represented on this plot. Productivity topics come through clearly (coworking, <a href="http://trello.com">Trello</a>, <a href="http://todoist.com">Todoist</a>, <a href="https://www.relay.fm/cortex/23">Amsterdam workcations</a>), as well as their involvement in the YouTube community (Pewdiepie, vlog(s), vidcon, patreon). Grey&rsquo;s frequent &ldquo;mhm&rdquo;-ing also came through clearly via speech-to-text.</li>
+<li>Hypercritical&rsquo;s most important words are the most complex, a reflection of the preparation and intentionality John Siracusa brought to this show. &ldquo;Rumination&rdquo; is the perfect word to emerge as the most important for Hypercritical.<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup></li>
+<li>The Talk Show&rsquo;s words are too perfect. John Gruber&rsquo;s son Jonas takes the top spot, followed by ⚾️ (his beloved Yankees take the 10 spot). Two of the words (Vesper and bourbon) can be represented by cocktail 🍸🥃 emoji, which I&rsquo;m sure would make him proud. I&rsquo;m glad &ldquo;dingus&rdquo; and Han Solo made the list too. &ldquo;Iowa&rdquo;  and &ldquo;bomber&rdquo; made me scratch my head, but once I looked at the transcripts, it was obvious this is how the speech-to-text interpreted how Gruber pronounces &ldquo;iOS&rdquo; and (Steve) &ldquo;Ballmer&rdquo;.</li>
+</ul>
+
+<p>This was a pretty fun side project and there&rsquo;s still a ton of data to analyze. I&rsquo;ll likely write some additional posts on this front, but until then, <a href="https://github.com/alspur/tidy_pod">follow this repo</a> to see what I&rsquo;m working on.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Never while I code. I can&rsquo;t code and listen to vocal music.
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">28 of Hypercritical&rsquo;s 100 episodes are still processing through the speech-to-text algorithm, so they were unavailable for this analysis.
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+      
+    </div>
+      </article> 
+      <hr>
+    
+    
+    
+     <h2 class="archive-title">May 5, 2017</h2>
+
+    
+    <article class="article">
+      <a href="/analyzing-the-analysts-with-tidytext/" class="archive-item-link">Analyzing the analysts with tidytext</a>
+      
+       
+     
+     <div class="article-content">
+        
+     
+
+<p>The publication of a <a href="https://sdp.cepr.harvard.edu/fellowship-capstone-reports">Capstone Report</a> is the culmination of the <a href="https://sdp.cepr.harvard.edu/fellowship">Strategic Data Project&rsquo;s Fellowship</a>. These reports highlight the impact Fellows have on their respective education agencies. There are more than thirty Capstone reports on the SDP website, sorted into four broad categories:</p>
+
+<ul>
+<li>Data Capacity, Quality, &amp; Culture</li>
+<li>Teacher Effectiveness</li>
+<li>Post-secondary Access &amp; Success</li>
+<li>School Improvement &amp; Redesign</li>
+</ul>
+
+<p>This gives us a general idea of the topics Fellows were covering in their reports, but it would be nice to get a little more detail without having to read more than two dozen reports.</p>
+
+<p>Enter <code>tidytext</code>.</p>
+
+<p>I&rsquo;ve been meaning to play around with the <code>tidytext</code> R package for several months. After seeing a really fun blog post using it to <a href="http://mdgbeck.netlify.com/post/tidytext-analysis-of-seinfeld/">analyze Seinfeld scripts</a>, I decided to try and apply the <code>tidytext</code> tools to the SDP Capstone reports, so I read through a few chapters of <a href="http://tidytextmining.com/preface.html">Text Mining with R</a> and got to work.</p>
+
+<h2 id="getting-the-reports">Getting the reports</h2>
+
+<p>Getting the text of each Capstone Report wasn&rsquo;t too challenging. I started by parsing the lines of the webpage that you&rsquo;d use to manually download the PDFs of each capstone report, then I filtered it for all the direct links to each individual PDF. After running a simple for loop, I had all 38 PDFs on my MacBook. Here&rsquo;s the code I used:</p>
+
+<pre><code class="language-R">
+library(RCurl)
+library(tidyverse)
+library(stringr)
+
+# download report pdf's ####
+
+# get content of sdp capstone report webpage
+sdp_url &lt;- getURL(&quot;https://sdp.cepr.harvard.edu/fellowship-capstone-reports&quot;)
+sdp_webpage &lt;- readLines(tc &lt;- textConnection(sdp_url)); close(tc)
+
+# create df of webpage content
+sdp_df &lt;- tibble(line = 1:360, content = sdp_webpage)
+
+# find and clean links to report pdf's
+capstone_links &lt;- sdp_df %&gt;%
+  mutate(link_present = str_detect(content, &quot;https://sdp.cepr.harvard.edu/files/cepr-sdp/files/&quot;)) %&gt;%
+  filter(link_present == TRUE) %&gt;%
+  mutate(clean_link = str_extract(content, &quot;https://sdp.cepr.harvard.edu/files/cepr-sdp/files/.+\\.pdf&quot;))
+
+# download report pdfs and save them in '/reports'
+for(i in seq_along(1:length(capstone_links$clean_link))){
+  
+  report_url &lt;- capstone_links$clean_link[i]
+  
+  download.file(report_url, str_c(&quot;reports/capstone&quot;, i,&quot;.pdf&quot;))
+}
+
+</code></pre>
+
+<h2 id="getting-the-text">Getting the text</h2>
+
+<p>After downloading the Capstone Reports, I needed to extract the text in each report, so I relied a function from the <code>pdftools</code> package. My code could probably be more efficient and there were some font-related errors, but I was able to extract the text from each report as a series of bigrams and then plot the result. Again, here&rsquo;s the code I used:</p>
+
+<pre><code class="language-R">library(tidyverse)
+library(stringr)
+library(pdftools)
+library(tidytext)
+library(ggraph)
+library(igraph)
+
+# create empty df
+bigram_df &lt;- tibble(word1 = character(), word2 = character(), 
+                    n = numeric(), report_num = numeric())
+
+# loop through each capstone pdf
+for(k in 1:38){
+  
+  # parse text from capstone pdf
+  report_text &lt;- pdf_text(str_c(&quot;reports/capstone&quot;, k,&quot;.pdf&quot;))
+  
+  # unnest text into bigrams
+  report_bigrams &lt;- tibble(chapter = report_text) %&gt;%
+    unnest_tokens(bigram, chapter,token = &quot;ngrams&quot;, n = 2)
+  
+  # split bigrams into separate columns
+  bigrams_sep &lt;- report_bigrams %&gt;% 
+    separate(bigram, c(&quot;word1&quot;, &quot;word2&quot;), sep = &quot; &quot;)
+  
+  # filter out stopwords, numbers, dupes; add count and report number
+  bigrams_filtered &lt;- bigrams_sep %&gt;% 
+    filter(!word1 %in% stop_words$word) %&gt;% 
+    filter(!word2 %in% stop_words$word) %&gt;% 
+    filter(!str_detect(word1, &quot;[0-9]&quot;)) %&gt;% 
+    filter(!str_detect(word2, &quot;[0-9]&quot;)) %&gt;% 
+    filter(word1 != word2) %&gt;%
+    count(word1, word2, sort = TRUE) %&gt;%
+    mutate(report_num = k)
+  
+  # add to df
+  bigram_df &lt;- bind_rows(bigram_df, bigrams_filtered)
+  
+}
+
+# prep data for graphing; only count bigrams w/ n &gt; 20
+bigram_graph &lt;- bigram_df %&gt;% 
+  filter(n &gt; 20) %&gt;% 
+  graph_from_data_frame()
+
+# set arrow type
+a &lt;- grid::arrow(type = &quot;closed&quot;, length = unit(.15, &quot;inches&quot;))
+
+set.seed(23)
+
+# plot bigram graph
+ggraph(bigram_graph, layout = &quot;fr&quot;) +
+  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
+                 arrow = a, end_cap = circle(.03, 'inches')) +
+  geom_node_point(color = &quot;lightblue&quot;, size = 3) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+  theme_void()
+
+# save plot
+ggsave(&quot;figures/capstone_bigrams.png&quot;, width = 12, height = 8, units = &quot;in&quot;)
+
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/alspur/capstone_text_analysis/master/figures/capstone_bigrams.png" alt="capstone bigrams" /></p>
+
+<p>The resulting plot paints a nice picture of what SDP Fellows wrote about in their Capstone Reports. There&rsquo;s a lot of focus on college readiness and teacher effectiveness, which were two of the &ldquo;buckets&rdquo; on the SDP website, but it&rsquo;s helpful to see what other words were frequently tied to those phrases. It also helps to see what some of the less-popular topics covered.</p>
+
+<p>The <code>tidytext</code> package is a ton of fun to work with - I&rsquo;m looking forward to using it more and finding new sources of text to analyze!</p>
+
+      
+    </div>
+      </article> 
+      <hr>
+    
+    <article class="article">
+      <a href="/sdp-convening-2017/" class="archive-item-link">SDP Convening 2017</a>
+      
+       
+     
+     <div class="article-content">
+        
+     <p>This was my second year attending the Strategic Data Project (SDP) Convening, the annual gathering of SDP Fellows and other education data nerds. There’s a ton of great content and conversation during the three days of Convening, here are some of the highlights from my perspective:</p>
+
+<ul>
+<li><a href="http://www.twitter.com/rickhess99">Rick Hess</a> kicked off the 2017 Convening with a brief talk on his latest book, <em><a href="https://www.amazon.com/Letters-Education-Reformer-Educational-Innovations/dp/1682530221">Letters to a Young Education Reformer</a></em>. His writing has been a big influence on my thinking when it comes to education policy, so it was pretty great hearing him speak in person.</li>
+<li>I really enjoyed hearing <a href="http://www.twitter.com/mpolikoff">Morgan Polikoff</a>, <a href="https://www.gse.harvard.edu/faculty/thomas-kane">Tom Kane</a>, and Eric Hirsch (ED of <a href="http://www.edreports.org">EdReports</a>) discuss their work on curricular materials. Helping schools select higher-quality textbooks can have a significant impact on student learning - states and districts would be wise to pay attention to the work they&rsquo;re doing!</li>
+<li>As is tradition at Convening, there is always a performance by a group of students after dinner on Thursday evening. This year, we were honored with readings from some of the <a href="http://www.826boston.org">student authors from 826 Boston</a>. Those kids are impressive.</li>
+<li>It was great to see <a href="http://opensdp.github.io">Open SDP</a> launch on the final day of Convening. The entire SDP community (and more) will benefit from this open source approach to education data analysis. I&rsquo;m looking forward to contributing!</li>
+</ul>
+
+<p>I left the 2017 SDP Convening with many new ideas for improving how my team can apply our analytic skills to improve outcomes for students in Kentucky and beyond. Based on that alone, I&rsquo;d call this year&rsquo;s Convening a success.</p>
+
+      
+    </div>
+      </article> 
+      <hr>
+    
+    
+    
+     <h2 class="archive-title">February 2, 2017</h2>
+
+    
+    <article class="article">
+      <a href="/school-choice-via-u-haul/" class="archive-item-link">School choice via U-Haul</a>
+      
+       
+     
+     <div class="article-content">
+        
+     
+
+<p>Earlier this week, <a href="http://www.twitter.com/thinkschools">Alex Hernandez</a> argued that 43 percent of children in the United States are benefiting from school choice. <a href="https://www.the74million.org/article/hernandez-devos-should-tell-her-critics-all-kids-deserve-school-choice-just-like-theirs-have">In The 74, he wrote</a>:</p>
+
+<blockquote>
+<p>School districts assign children to public schools based on where they live. Then, the world’s largest game of musical chairs begins. The families of 24 million students find ways around their forced assignments to get the schools they want for their kids.</p>
+
+<p>The biggest school choice group is families who move to a new neighborhood to change their assigned school. They represent an estimated 8.2 million students, about one third of all school choosers. To be clear: The most popular way to choose a school in America is to literally move your family.</p>
+</blockquote>
+
+<p>This led me to wonder: what kinds of families are able to choose a school for their child by moving? Thankfully, Hernandez shows his work in <a href="https://medium.com/@thinkschools/the-74-million-hernandez-devos-should-tell-her-critics-all-kids-deserve-school-choice-just-like-21d250c48e0f#.r6scv7i9l">a Medium post</a>, revealing the specific NCES reports he used to generate his estimates. His data comes from the <a href="https://nces.ed.gov/nhes/dataproducts.asp">NCES National Household Education Surveys Program</a>, specifically the Parent and Family Involvement in Education (PFI) survey.</p>
+
+<p>Earlier this month, I was at an <a href="http://sdp.cepr.harvard.edu">SDP workshop</a> and heard from <a href="https://twitter.com/alex_j_bowers">Alex Bowers</a> on the kinds of research you can do with publicly-available education data, including NCES surveys.</p>
+
+<p>I took this coincidence as a sign to take the advice of one Alex (Bowers) and extend the work of another Alex (Hernandez). All of the analysis below was performed using this publicly available data and <a href="https://github.com/alspur/nces_household_survey">the code is available on GitHub</a>.</p>
+
+<h2 id="who-are-the-movers">Who are the movers?</h2>
+
+<p>Moving isn’t cheap. Families with more financial resources are more able to absorb the costs associated with moving to a neighborhood with a more desirable zoned school. Generally, as household income rises, students are more likely to have moved to their neighborhood specifically for the school. The following graph shows how frequently parents responding to the NCES survey decided to move neighborhoods for a better school, broken down by household income.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/inc_move_pct.png" alt="inc_move_pct" /></p>
+
+<p>The racial demographics of each income bracket vary. Higher-income movers are less racially diverse than lower-income movers.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/race_inc_move.png" alt="race_in_move" /></p>
+
+<p>Splitting the chart above by racial group, we can see how likely a family is to move given their race and their incomes. We can see that the groups most likely to move neighborhoods for better schools are white and Asian families with a six-figure household income.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/race_inc_move_pct.png" alt="race_in_move_pct" /></p>
+
+<h2 id="what-are-the-most-popular-destinations-for-movers">What are the most popular destinations for movers?</h2>
+
+<p>The public NCES survey data doesn’t include precise location data, but it does provide the <strong>type</strong> of neighborhood where these families live. It’s not surprising to see that most movers head for the suburbs. For clarification on what separates a “suburb, large” from a “town, distant” check out <a href="https://nces.ed.gov/surveys/ruraled/definitions.asp">their definitions on the NCES website</a>.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/zip_move.png" alt="zip_move" /></p>
+
+<p>This chart shows the volume of movers by their chosen destination and their household income. It’s pretty clear that affluent families overwhelmingly choose to move to either suburbs or “rural, fringe” areas, defined as:</p>
+
+<blockquote>
+<p>Census-defined rural territory that is less than or equal to 5 miles from an urbanized area, as well as rural territory that is less than or equal to 2.5 miles from an urban cluster</p>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/inc_move_zip.png" alt="inc_move_zip" /></p>
+
+<p>For lower-income families, suburbs are still a popular destination, but they are much more likely to choose cities or towns.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/inc_move_zip_pct.png" alt="inc_move_zip_pct" /></p>
+
+<p>Mover destinations by race reveal a consistent preference for suburbs, with varying degrees of preference for other destination types.</p>
+
+<p><img src="https://raw.githubusercontent.com/alspur/nces_household_survey/master/figures/zip_race_move_pct.png" alt="zip_race_move_pct" /></p>
+
+<p>I’ve only scratched the surface of what we can learn from this particular survey. It has a lot more information I’d like to investigate, including parents’ views on school quality, if their students are in their first-choice school, and more. The survey has also been administered in 2007, 2005, and 2003, so it would be interesting to track some of these patterns on both sides of the Great Recession.</p>
+
+<p>Publicly-available education data is pretty cool.</p>
+
+      
+    </div>
+      </article> 
+      <hr>
+    
+    
+    
+     <h2 class="archive-title">August 8, 2016</h2>
+
+    
+    <article class="article">
+      <a href="/how-to-create-a-free-distributed-data-collection-app-with-r-and-google-sheets/" class="archive-item-link">How to create a free distributed data collection &#34;app&#34; with R and Google Sheets</a>
+      
+      
+      
+      
+      
+      
+      
+      <a href = "http://simplystatistics.org/2016/08/26/googlesheets/"><font color="3c3e40"><i class="fa fa-link" 
+      title="directlink"></i></a></font>
+      
+     
+      
+      
+     
+     <div class="article-content">
+        
+     <p>A really neat concept that reminds me of my <a href="http://alspur.com/time-tracking/">time tracking method</a>:</p>
+
+<blockquote>
+<p><a href="http://www.stat.ubc.ca/~jenny/">Jenny Bryan</a>, developer of the <a href="https://github.com/jennybc/googlesheets">google sheets R package</a>, <a href="https://speakerdeck.com/jennybc/googlesheets-talk-at-user2015">gave a talk</a> at Use2015 about the package.</p>
+
+<p>One of the things that got me most excited about the package was an example she gave in her talk of using the Google Sheets package for data collection at ultimate frisbee tournaments. One reason is that I used to play a little ultimate <a href="http://www.pbase.com/jmlane/image/76852417">back in the day</a>.</p>
+
+<p>Another is that her idea is an amazing one for producing cool public health applications. One of the major issues with public health is being able to do distributed data collection cheaply, easily, and reproducibly. So I decided to write a little tutorial on how one could use <a href="https://www.google.com/sheets/about/">Google Sheets</a> and R to create a free distributed data collecton “app” for public health (or anything else really).</p>
+</blockquote>
+
+<p>There&rsquo;s plenty of hype around &ldquo;big data&rdquo; in every field, including education, but I&rsquo;m convinced there are many interesting questions that could be investigated at the school/district level with a &ldquo;small data&rdquo; approach supported by this workflow. There are obvious limitations - you wouldn&rsquo;t want to put individual student/teacher data in a public Google Sheet - but it&rsquo;s worth thinking about the kinds of programs/practices in schools that could benefit from research supported by distributed data collection.</p>
+
+      
+    </div>
+      </article> 
+      <hr>
+    
+    
+    
+    
+    
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+            <a href = "http://www.github.com/alspur"><font color="3c3e40"><i class="fa fa-github-alt"></i></a></font>
+          </li>
+          <li>
+            <a href = "http://www.linkedin.com/alspur"><font color="3c3e40"><i class="fa fa-linkedin"></i></a></font>
+          </li>
+          <li>
+            <a href = "mailto:alex.spurrier@gmail.com"><font color="3c3e40"><i class="fa fa-envelope-o"></i></a></font>
+          </li>
+          <li>
+            <a href = "http://www.instagram.com/alspur"><font color="3c3e40"><i class="fa fa-instagram"></i></a></font>
+          </li>
+          <li>
+            <a href = "http://www.twitter.com/alspur"><font color="3c3e40"><i class="fa fa-twitter"></i></a></font>
+          </li>
+        
+            
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+    
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56149120-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
+

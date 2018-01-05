@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Podcasts on @alspur</title>
+    <link>/tags/podcasts/</link>
+    <description>Recent content in Podcasts on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 06 Jun 2017 18:05:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/podcasts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tidytext analysis of podcast transcripts</title>
+      <link>/tidytext-analysis-of-podcast-transcripts/</link>
+      <pubDate>Tue, 06 Jun 2017 18:05:00 -0500</pubDate>
+      
+      <guid>/tidytext-analysis-of-podcast-transcripts/</guid>
+      <description>I listen to podcasts for several hours each day. When I wake up, I launch Overcast and listen to a podcast while I have coffee. They&amp;rsquo;re playing my drive to work, sometimes while I work,1 and when I&amp;rsquo;m running my shutdown routine at night to get ready for the next day.
+I love my podcasts.
+Earlier this year, _DavidSmith released a side project, Podcast Search. His description of this project:</description>
+    </item>
+    
+  </channel>
+</rss>

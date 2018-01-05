@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linked on @alspur</title>
+    <link>/tags/linked/</link>
+    <description>Recent content in Linked on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Nov 2017 08:21:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/linked/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Management Quality in Public Education</title>
+      <link>/management-quality-in-public-education/</link>
+      <pubDate>Mon, 20 Nov 2017 08:21:00 -0500</pubDate>
+      
+      <guid>/management-quality-in-public-education/</guid>
+      <description>What impact does a high-quality superintendent have on student performance? A new NBER paper by Victor Lavy and Adi Boiko investigates this question using data from schools in Israel, finding a significant effect on student achievement (.04 SD) for top-quality superintendents. From the abstract:
+ We exploit a quasi-random matching of superintendent and schools, and estimate that superintendent value added has positive and significant effects on primary and middle school students’ test scores in math, Hebrew, and English.</description>
+    </item>
+    
+    <item>
+      <title>Measuring Success in Education</title>
+      <link>/measuring-success-in-education/</link>
+      <pubDate>Tue, 14 Nov 2017 09:00:00 -0500</pubDate>
+      
+      <guid>/measuring-success-in-education/</guid>
+      <description>Do low-stakes international assessments of student performance accurately describe student ability? According to this recent NBER Working paper, a country&amp;rsquo;s results may depend on their students&amp;rsquo; intrinsic motivation to do well.
+The authors used an experimental approach that offered treatment students a small financial incentive to do well on a test. Students in the treatment group were told just before the test that an envelope with the equivalent of $25 (US) was theirs, but that $1 would be subtracted for each incorrect answer.</description>
+    </item>
+    
+    <item>
+      <title>IBM Is Counting on Its Bet on Watson</title>
+      <link>/ibm-is-counting-on-its-bet-on-watson/</link>
+      <pubDate>Tue, 25 Oct 2016 06:30:00 -0500</pubDate>
+      
+      <guid>/ibm-is-counting-on-its-bet-on-watson/</guid>
+      <description>Nowadays, Watson isn&amp;rsquo;t just playing Jeopardy:
+ At the University of North Carolina School of Medicine, Watson was tested on 1,000 cancer diagnoses made by human experts. In 99 percent of them, Watson recommended the same treatment as the oncologists.
+In 30 percent of the cases, Watson also found a treatment option the human doctors missed. Some treatments were based on research papers that the doctors had not read — more than 160,000 cancer research papers are published a year.</description>
+    </item>
+    
+    <item>
+      <title>Blame the Elites for the Trump Phenomenon</title>
+      <link>/blame-the-elites-for-the-trump-phenomenon/</link>
+      <pubDate>Sun, 18 Sep 2016 08:30:00 -0500</pubDate>
+      
+      <guid>/blame-the-elites-for-the-trump-phenomenon/</guid>
+      <description>Intelligence Squared hosts Oxford-style debates, with two teams supporting or opposing a motion. The motion of their most recent debate: blame the elites for the Trump phenomenon.
+Personally, I&amp;rsquo;m for the motion, but I would encourage you to watch and decide for yourself.</description>
+    </item>
+    
+    <item>
+      <title>How to create a free distributed data collection &#34;app&#34; with R and Google Sheets</title>
+      <link>/how-to-create-a-free-distributed-data-collection-app-with-r-and-google-sheets/</link>
+      <pubDate>Mon, 29 Aug 2016 06:20:00 -0500</pubDate>
+      
+      <guid>/how-to-create-a-free-distributed-data-collection-app-with-r-and-google-sheets/</guid>
+      <description>A really neat concept that reminds me of my time tracking method:
+ Jenny Bryan, developer of the google sheets R package, gave a talk at Use2015 about the package.
+One of the things that got me most excited about the package was an example she gave in her talk of using the Google Sheets package for data collection at ultimate frisbee tournaments. One reason is that I used to play a little ultimate back in the day.</description>
+    </item>
+    
+    <item>
+      <title>Why American Schools Are Even More Unequal Than We Thought</title>
+      <link>/why-american-schools-are-even-more-unequal-than-we-thought/</link>
+      <pubDate>Fri, 12 Aug 2016 14:08:00 -0500</pubDate>
+      
+      <guid>/why-american-schools-are-even-more-unequal-than-we-thought/</guid>
+      <description>Using data to inform our conversations about public school performance is a good idea, but too often, the measures we use are reduced to imprecise terms like &amp;ldquo;proficiency,&amp;rdquo; which can carry several different meanings when describing a local, state, or national assessment1.
+As Susan Dynarski notes in The Upshot, this is also a common problem with the most-frequently used proxy for &amp;ldquo;poverty&amp;rdquo; in education, Free/Reduced Price Lunch (FRPL) eligibility:
+ &amp;ldquo;Nearly half of students nationwide are eligible for a subsidized meal in school.</description>
+    </item>
+    
+  </channel>
+</rss>

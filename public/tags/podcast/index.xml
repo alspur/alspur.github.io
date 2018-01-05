@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Podcast on @alspur</title>
+    <link>/tags/podcast/</link>
+    <description>Recent content in Podcast on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 27 Jul 2017 09:14:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/podcast/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Moving beyond a craft</title>
+      <link>/moving-beyond-a-craft/</link>
+      <pubDate>Thu, 27 Jul 2017 09:14:00 -0500</pubDate>
+      
+      <guid>/moving-beyond-a-craft/</guid>
+      <description>Tyler Cowen recently interviewed Atul Gawande on his podcast, Conversations with Tyler. It’s a great episode and worth listening to the whole thing, but one section in particular stood out to me. From the transcript:
+ COWEN: What’s the number one thing missing in medical education today, for doctors?
+GAWANDE: I think the number one thing is an education around the fact that we are no longer a craft. It’s no longer an individual craft of being the smartest, most experienced, and capable individual.</description>
+    </item>
+    
+    <item>
+      <title>Tinkering</title>
+      <link>/tinkering/</link>
+      <pubDate>Wed, 10 Aug 2016 09:18:00 -0500</pubDate>
+      
+      <guid>/tinkering/</guid>
+      <description>The most recent episode of Mad Dogs &amp;amp; Englishmen1 starts off with a discussion of buying and assembling and AR-15 from scratch. It&amp;rsquo;s an interesting process, but the conversation took an even more interesting turn as they focused on the decline of a tinkering ethos in our society.
+The machines and devices we use are often too complex to repair, disassemble, or customize. If you open the hood of your car, you won&amp;rsquo;t be able to see or even access many of the most critical parts - you&amp;rsquo;ll most likely see a series of injection-molded plastic meant to not only protect but to discourage amateur tinkering.</description>
+    </item>
+    
+    <item>
+      <title>Time Tracking</title>
+      <link>/time-tracking/</link>
+      <pubDate>Fri, 29 Jul 2016 20:49:00 -0500</pubDate>
+      
+      <guid>/time-tracking/</guid>
+      <description>I tweeted this out earlier today:
+Insights from time tracking: I need to do more #rstats programming on Thursday/Friday afternoons. Also, mtgs suck. pic.twitter.com/14dFtGNubP
+&amp;mdash; Alex Spurrier (@alspur) July 29, 2016 
+Why do I have time tracking charts that break down when I do certain kinds of work?
+A book (Deep Work) and a podcast (Cortex).
+I know that the ability to focus is important to the work I do, but Deep Work by Cal Newport helped articulate precisely why it&amp;rsquo;s extremely important to cultivate the ability to perform &amp;ldquo;deep work.</description>
+    </item>
+    
+    <item>
+      <title>Ezra Klein interviews Yuval Levin</title>
+      <link>/ezra-klein-interviews-yuval-levin/</link>
+      <pubDate>Tue, 19 Jul 2016 21:54:00 -0500</pubDate>
+      
+      <guid>/ezra-klein-interviews-yuval-levin/</guid>
+      <description>This is a thoughtful, in-depth conversation that covers from the thesis of Levin&amp;rsquo;s latest book, The Fractured Republic, his experience working in the Bush (43) Administration, the most interesting policy ideas on each side of the political spectrum, and more.
+This is the first Ezra Klein Show episode I&amp;rsquo;ve listened to - I&amp;rsquo;m looking forward to adding others to my Overcast queue.</description>
+    </item>
+    
+  </channel>
+</rss>

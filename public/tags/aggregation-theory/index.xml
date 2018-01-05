@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aggregation Theory on @alspur</title>
+    <link>/tags/aggregation-theory/</link>
+    <description>Recent content in Aggregation Theory on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Aug 2016 06:15:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/aggregation-theory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Aggregation Theory and Education</title>
+      <link>/aggregation-theory-and-education/</link>
+      <pubDate>Mon, 15 Aug 2016 06:15:00 -0500</pubDate>
+      
+      <guid>/aggregation-theory-and-education/</guid>
+      <description>Five years ago, Marc Andressen took to the pages of the Wall Street Journal to describe how software was &amp;ldquo;eating the world&amp;rdquo;:
+ &amp;ldquo;More and more major businesses and industries are being run on software and delivered as online services—from movies to agriculture to national defense. Many of the winners are Silicon Valley-style entrepreneurial technology companies that are invading and overturning established industry structures. Over the next 10 years, I expect many more industries to be disrupted by software, with new world-beating Silicon Valley companies doing the disruption in more cases than not.</description>
+    </item>
+    
+  </channel>
+</rss>

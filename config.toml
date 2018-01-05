@@ -1,0 +1,55 @@
+baseurl = "http://www.alspur.com"
+languageCode = "en-us"
+title = "@alspur"
+theme = "hugo-lithium-theme"
+googleAnalytics = "UA-56149120-1"
+enableEmoji = true 
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[permalinks]
+    post = "/:slug/"
+
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 1
+[[menu.main]]
+    name = "Projects"
+    url = "/projects/"  
+    weight = 2
+[[menu.main]]
+    name = "Archive"
+    url = "/archive/"  
+    weight = 3
+[[menu.main]]
+    name = "Resume"
+    url = "/files/spurrier_resume.pdf/"  
+    weight = 4
+
+[params]
+    description = "A website built through Hugo and blogdown."
+
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.11.0"
+    highlightjsCDN = "//cdn.bootcss.com"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+
+    MathJaxCDN = "//cdn.bootcss.com"
+    MathJaxVersion = "2.7.1"
+
+    [params.logo]
+    url = "alspur_logo.png"
+    width = 50
+    height = 50
+    alt = "Logo"
+    
+    [params.social]
+    twitter = "alspur"
+    
+    [params.headshot]
+    url = "alspur_headshot.png"
+    width = 50
+    height = 50
+    alt = "alspur"
+

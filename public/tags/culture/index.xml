@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Culture on @alspur</title>
+    <link>/tags/culture/</link>
+    <description>Recent content in Culture on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Aug 2016 08:04:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/culture/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Long-Term Orientation and Educational Performance</title>
+      <link>/long-term-orientation-and-educational-performance/</link>
+      <pubDate>Mon, 22 Aug 2016 08:04:00 -0500</pubDate>
+      
+      <guid>/long-term-orientation-and-educational-performance/</guid>
+      <description>If there&amp;rsquo;s one common thread between Robin Lake relating The Boys in the Boat to schools, Neerav Kingsland on a recent charter study, and Robert Pondiscio on Hillbilly Elegy, it&amp;rsquo;s that culture plays a huge role in education. A new NBER Working Paper provides powerful evidence that it may be even more critical than was previously understood.
+The authors examine the performance of first and second generation immigrant students in Florida to understand the relationship between the &amp;ldquo;long-term orientation&amp;rdquo; of the cultures they come from to their educational outcomes.</description>
+    </item>
+    
+  </channel>
+</rss>

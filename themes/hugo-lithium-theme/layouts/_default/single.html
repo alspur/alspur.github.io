@@ -1,0 +1,50 @@
+{{ partial "header.html" . }}
+
+<main class="content" role="main">
+
+  <article class="article">
+
+    <h2 class="article-title">{{ .Title }}
+    
+      {{ if .Params.link }}
+      
+      <!-- Need to go through and add all the permutations of 
+           icons that I have on my current site -->
+      
+      {{ if in .Params.link "overcast" }}
+      
+      <a href = "{{ .Params.link }}"><font color="3c3e40"><i class="fa fa-rss" 
+      title="directlink"></i></a>
+      
+      {{ else if in .Params.link "amazon" }}
+      
+      <a href = "{{ .Params.link }}"><font color="3c3e40"><i class="fa fa-book" 
+      title="directlink"></i></a>
+      
+      {{ else  }}
+      
+      <a href = "{{ .Params.link }}"><font color="3c3e40"><i class="fa fa-link" 
+      title="directlink"></i></a>
+      
+     {{ end }}
+      
+     {{end}}
+    
+    </h1>
+    
+    {{ if eq .Section "post" }}
+    <div class="article-date">{{ .Date.Format "January 2, 2006" }}</div>
+    
+    {{ end }}
+
+    <div class="article-content">
+      {{ .Content }}
+    </div>
+    
+  </article>
+
+
+
+</main>
+
+{{ partial "footer.html" . }}

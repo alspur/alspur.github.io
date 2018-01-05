@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="generator" content="Hugo 0.30.2" />
+
+
+<title>Analyzing the analysts with tidytext - @alspur</title>
+<meta property="og:title" content="Analyzing the analysts with tidytext - @alspur">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/alspur_logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/projects/">Projects</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">Analyzing the analysts with tidytext
+    
+     
+    
+    </h1>
+    
+    <span class="article-date">May 24, 2017</span>
+    
+    
+
+    <div class="article-content">
+      
+
+<p>The publication of a <a href="https://sdp.cepr.harvard.edu/fellowship-capstone-reports">Capstone Report</a> is the culmination of the <a href="https://sdp.cepr.harvard.edu/fellowship">Strategic Data Project&rsquo;s Fellowship</a>. These reports highlight the impact Fellows have on their respective education agencies. There are more than thirty Capstone reports on the SDP website, sorted into four broad categories:</p>
+
+<ul>
+<li>Data Capacity, Quality, &amp; Culture</li>
+<li>Teacher Effectiveness</li>
+<li>Post-secondary Access &amp; Success</li>
+<li>School Improvement &amp; Redesign</li>
+</ul>
+
+<p>This gives us a general idea of the topics Fellows were covering in their reports, but it would be nice to get a little more detail without having to read more than two dozen reports.</p>
+
+<p>Enter <code>tidytext</code>.</p>
+
+<p>I&rsquo;ve been meaning to play around with the <code>tidytext</code> R package for several months. After seeing a really fun blog post using it to <a href="http://mdgbeck.netlify.com/post/tidytext-analysis-of-seinfeld/">analyze Seinfeld scripts</a>, I decided to try and apply the <code>tidytext</code> tools to the SDP Capstone reports, so I read through a few chapters of <a href="http://tidytextmining.com/preface.html">Text Mining with R</a> and got to work.</p>
+
+<h2 id="getting-the-reports">Getting the reports</h2>
+
+<p>Getting the text of each Capstone Report wasn&rsquo;t too challenging. I started by parsing the lines of the webpage that you&rsquo;d use to manually download the PDFs of each capstone report, then I filtered it for all the direct links to each individual PDF. After running a simple for loop, I had all 38 PDFs on my MacBook. Here&rsquo;s the code I used:</p>
+
+<pre><code class="language-R">
+library(RCurl)
+library(tidyverse)
+library(stringr)
+
+# download report pdf's ####
+
+# get content of sdp capstone report webpage
+sdp_url &lt;- getURL(&quot;https://sdp.cepr.harvard.edu/fellowship-capstone-reports&quot;)
+sdp_webpage &lt;- readLines(tc &lt;- textConnection(sdp_url)); close(tc)
+
+# create df of webpage content
+sdp_df &lt;- tibble(line = 1:360, content = sdp_webpage)
+
+# find and clean links to report pdf's
+capstone_links &lt;- sdp_df %&gt;%
+  mutate(link_present = str_detect(content, &quot;https://sdp.cepr.harvard.edu/files/cepr-sdp/files/&quot;)) %&gt;%
+  filter(link_present == TRUE) %&gt;%
+  mutate(clean_link = str_extract(content, &quot;https://sdp.cepr.harvard.edu/files/cepr-sdp/files/.+\\.pdf&quot;))
+
+# download report pdfs and save them in '/reports'
+for(i in seq_along(1:length(capstone_links$clean_link))){
+  
+  report_url &lt;- capstone_links$clean_link[i]
+  
+  download.file(report_url, str_c(&quot;reports/capstone&quot;, i,&quot;.pdf&quot;))
+}
+
+</code></pre>
+
+<h2 id="getting-the-text">Getting the text</h2>
+
+<p>After downloading the Capstone Reports, I needed to extract the text in each report, so I relied a function from the <code>pdftools</code> package. My code could probably be more efficient and there were some font-related errors, but I was able to extract the text from each report as a series of bigrams and then plot the result. Again, here&rsquo;s the code I used:</p>
+
+<pre><code class="language-R">library(tidyverse)
+library(stringr)
+library(pdftools)
+library(tidytext)
+library(ggraph)
+library(igraph)
+
+# create empty df
+bigram_df &lt;- tibble(word1 = character(), word2 = character(), 
+                    n = numeric(), report_num = numeric())
+
+# loop through each capstone pdf
+for(k in 1:38){
+  
+  # parse text from capstone pdf
+  report_text &lt;- pdf_text(str_c(&quot;reports/capstone&quot;, k,&quot;.pdf&quot;))
+  
+  # unnest text into bigrams
+  report_bigrams &lt;- tibble(chapter = report_text) %&gt;%
+    unnest_tokens(bigram, chapter,token = &quot;ngrams&quot;, n = 2)
+  
+  # split bigrams into separate columns
+  bigrams_sep &lt;- report_bigrams %&gt;% 
+    separate(bigram, c(&quot;word1&quot;, &quot;word2&quot;), sep = &quot; &quot;)
+  
+  # filter out stopwords, numbers, dupes; add count and report number
+  bigrams_filtered &lt;- bigrams_sep %&gt;% 
+    filter(!word1 %in% stop_words$word) %&gt;% 
+    filter(!word2 %in% stop_words$word) %&gt;% 
+    filter(!str_detect(word1, &quot;[0-9]&quot;)) %&gt;% 
+    filter(!str_detect(word2, &quot;[0-9]&quot;)) %&gt;% 
+    filter(word1 != word2) %&gt;%
+    count(word1, word2, sort = TRUE) %&gt;%
+    mutate(report_num = k)
+  
+  # add to df
+  bigram_df &lt;- bind_rows(bigram_df, bigrams_filtered)
+  
+}
+
+# prep data for graphing; only count bigrams w/ n &gt; 20
+bigram_graph &lt;- bigram_df %&gt;% 
+  filter(n &gt; 20) %&gt;% 
+  graph_from_data_frame()
+
+# set arrow type
+a &lt;- grid::arrow(type = &quot;closed&quot;, length = unit(.15, &quot;inches&quot;))
+
+set.seed(23)
+
+# plot bigram graph
+ggraph(bigram_graph, layout = &quot;fr&quot;) +
+  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
+                 arrow = a, end_cap = circle(.03, 'inches')) +
+  geom_node_point(color = &quot;lightblue&quot;, size = 3) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+  theme_void()
+
+# save plot
+ggsave(&quot;figures/capstone_bigrams.png&quot;, width = 12, height = 8, units = &quot;in&quot;)
+
+</code></pre>
+
+<p><img src="https://raw.githubusercontent.com/alspur/capstone_text_analysis/master/figures/capstone_bigrams.png" alt="capstone bigrams" /></p>
+
+<p>The resulting plot paints a nice picture of what SDP Fellows wrote about in their Capstone Reports. There&rsquo;s a lot of focus on college readiness and teacher effectiveness, which were two of the &ldquo;buckets&rdquo; on the SDP website, but it&rsquo;s helpful to see what other words were frequently tied to those phrases. It also helps to see what some of the less-popular topics covered.</p>
+
+<p>The <code>tidytext</code> package is a ton of fun to work with - I&rsquo;m looking forward to using it more and finding new sources of text to analyze!</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with Hugo</a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

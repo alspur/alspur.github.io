@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Essa on @alspur</title>
+    <link>/tags/essa/</link>
+    <description>Recent content in Essa on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Aug 2016 06:26:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/essa/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ESSA and the Administrative State</title>
+      <link>/essa-and-the-administrative-state/</link>
+      <pubDate>Thu, 18 Aug 2016 06:26:00 -0500</pubDate>
+      
+      <guid>/essa-and-the-administrative-state/</guid>
+      <description>Chad Aldeman on the delegation of policy making in ESSA:
+ Congress was able to reach broad bipartisan agreement on ESSA mainly because it punted on a number of key policy questions. Any reading of ESSA leaves one wondering what exactly Congress meant when it asked states to “meaningfully differentiate” among schools, when it required that states give “substantial weight” to each indicator, or when it stipulated that academic indicators count for “much greater weight” than non-academic ones.</description>
+    </item>
+    
+    <item>
+      <title>The objective paradox</title>
+      <link>/the-objective-paradox/</link>
+      <pubDate>Wed, 23 Dec 2015 17:30:00 -0500</pubDate>
+      
+      <guid>/the-objective-paradox/</guid>
+      <description>This entire article on creativity is worth a read, but one passage in particular caught my attention:
+ In one experiment a bipedal robot programmed to walk farther and farther actually ended up walking less far than one that simply was programmed to do something novel again and again, Stanley writes. Falling on the ground and flailing your legs doesn’t look much like walking, but it’s a good way to learn to oscillate, and oscillation is the most effective motion for walking.</description>
+    </item>
+    
+    <item>
+      <title>The Fatal Conceit &amp; ESSA</title>
+      <link>/the-fatal-conceit--essa/</link>
+      <pubDate>Tue, 01 Dec 2015 17:30:00 -0500</pubDate>
+      
+      <guid>/the-fatal-conceit--essa/</guid>
+      <description>&amp;ldquo;The curious task of economics is to demonstrate to men how little they really know about what they imagine they can design&amp;rdquo; - F.A. Hayek, The Fatal Conceit
+ The ink on the recently released Every Student Succeeds Act (ESSA) is barely dry, but progressive ed reformers are already panning the proposed successor to the defunct No Child Left Behind Act (NCLB). Conor Williams argues that not only should Obama veto the NCLB rewrite, progressives should fear it.</description>
+    </item>
+    
+  </channel>
+</rss>

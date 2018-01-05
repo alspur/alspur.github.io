@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Research on @alspur</title>
+    <link>/tags/research/</link>
+    <description>Recent content in Research on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Nov 2017 08:21:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/research/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Management Quality in Public Education</title>
+      <link>/management-quality-in-public-education/</link>
+      <pubDate>Mon, 20 Nov 2017 08:21:00 -0500</pubDate>
+      
+      <guid>/management-quality-in-public-education/</guid>
+      <description>What impact does a high-quality superintendent have on student performance? A new NBER paper by Victor Lavy and Adi Boiko investigates this question using data from schools in Israel, finding a significant effect on student achievement (.04 SD) for top-quality superintendents. From the abstract:
+ We exploit a quasi-random matching of superintendent and schools, and estimate that superintendent value added has positive and significant effects on primary and middle school students’ test scores in math, Hebrew, and English.</description>
+    </item>
+    
+    <item>
+      <title>Measuring Success in Education</title>
+      <link>/measuring-success-in-education/</link>
+      <pubDate>Tue, 14 Nov 2017 09:00:00 -0500</pubDate>
+      
+      <guid>/measuring-success-in-education/</guid>
+      <description>Do low-stakes international assessments of student performance accurately describe student ability? According to this recent NBER Working paper, a country&amp;rsquo;s results may depend on their students&amp;rsquo; intrinsic motivation to do well.
+The authors used an experimental approach that offered treatment students a small financial incentive to do well on a test. Students in the treatment group were told just before the test that an envelope with the equivalent of $25 (US) was theirs, but that $1 would be subtracted for each incorrect answer.</description>
+    </item>
+    
+  </channel>
+</rss>

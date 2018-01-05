@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Politics on @alspur</title>
+    <link>/tags/politics/</link>
+    <description>Recent content in Politics on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 09 Aug 2016 13:31:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/politics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Intellectuals are Freaks</title>
+      <link>/intellectuals-are-freaks/</link>
+      <pubDate>Tue, 09 Aug 2016 13:31:00 -0500</pubDate>
+      
+      <guid>/intellectuals-are-freaks/</guid>
+      <description>Michael Lind on the weakness of intellectuals&amp;rsquo; approach to inequality:
+ The views of intellectuals about social reform tend to be warped by professional and personal biases, as well. In the U.S. the default prescription for inequality and other social problems among professors, pundits, and policy wonks alike tends to be: More education! Successful intellectuals get where they are by being good at taking tests and by going to good schools.</description>
+    </item>
+    
+    <item>
+      <title>Ezra Klein interviews Yuval Levin</title>
+      <link>/ezra-klein-interviews-yuval-levin/</link>
+      <pubDate>Tue, 19 Jul 2016 21:54:00 -0500</pubDate>
+      
+      <guid>/ezra-klein-interviews-yuval-levin/</guid>
+      <description>This is a thoughtful, in-depth conversation that covers from the thesis of Levin&amp;rsquo;s latest book, The Fractured Republic, his experience working in the Bush (43) Administration, the most interesting policy ideas on each side of the political spectrum, and more.
+This is the first Ezra Klein Show episode I&amp;rsquo;ve listened to - I&amp;rsquo;m looking forward to adding others to my Overcast queue.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Charter Schools on @alspur</title>
+    <link>/tags/charter-schools/</link>
+    <description>Recent content in Charter Schools on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 03 Jun 2015 09:00:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/charter-schools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Deal on charters in detail</title>
+      <link>/deal-on-charters-in-detail/</link>
+      <pubDate>Wed, 03 Jun 2015 09:00:00 -0500</pubDate>
+      
+      <guid>/deal-on-charters-in-detail/</guid>
+      <description>The CT Mirror reports that Governor Malloy and Democratic legislators struck a budget deal that would allow two new charter schools to open as well as supporting the growth of existing charter schools.1
+On paper, this charter growth will cost the state $12.4 million in FY16, but it actually took an additional $23.5 million increase in FY16 ECS funding to make it happen. In other words, for every $1 in new funding to support growth in charter schools, legislators insisted that $2 went to support traditional public schools via ECS grants.</description>
+    </item>
+    
+  </channel>
+</rss>

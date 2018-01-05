@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data on @alspur</title>
+    <link>/tags/data/</link>
+    <description>Recent content in Data on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 06 Jun 2017 18:05:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/data/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tidytext analysis of podcast transcripts</title>
+      <link>/tidytext-analysis-of-podcast-transcripts/</link>
+      <pubDate>Tue, 06 Jun 2017 18:05:00 -0500</pubDate>
+      
+      <guid>/tidytext-analysis-of-podcast-transcripts/</guid>
+      <description>I listen to podcasts for several hours each day. When I wake up, I launch Overcast and listen to a podcast while I have coffee. They&amp;rsquo;re playing my drive to work, sometimes while I work,1 and when I&amp;rsquo;m running my shutdown routine at night to get ready for the next day.
+I love my podcasts.
+Earlier this year, _DavidSmith released a side project, Podcast Search. His description of this project:</description>
+    </item>
+    
+    <item>
+      <title>Analyzing the analysts with tidytext</title>
+      <link>/analyzing-the-analysts-with-tidytext/</link>
+      <pubDate>Wed, 24 May 2017 14:55:00 -0500</pubDate>
+      
+      <guid>/analyzing-the-analysts-with-tidytext/</guid>
+      <description>The publication of a Capstone Report is the culmination of the Strategic Data Project&amp;rsquo;s Fellowship. These reports highlight the impact Fellows have on their respective education agencies. There are more than thirty Capstone reports on the SDP website, sorted into four broad categories:
+ Data Capacity, Quality, &amp;amp; Culture Teacher Effectiveness Post-secondary Access &amp;amp; Success School Improvement &amp;amp; Redesign  This gives us a general idea of the topics Fellows were covering in their reports, but it would be nice to get a little more detail without having to read more than two dozen reports.</description>
+    </item>
+    
+    <item>
+      <title>SDP Convening 2017</title>
+      <link>/sdp-convening-2017/</link>
+      <pubDate>Mon, 22 May 2017 22:51:00 -0500</pubDate>
+      
+      <guid>/sdp-convening-2017/</guid>
+      <description>This was my second year attending the Strategic Data Project (SDP) Convening, the annual gathering of SDP Fellows and other education data nerds. There’s a ton of great content and conversation during the three days of Convening, here are some of the highlights from my perspective:
+ Rick Hess kicked off the 2017 Convening with a brief talk on his latest book, Letters to a Young Education Reformer. His writing has been a big influence on my thinking when it comes to education policy, so it was pretty great hearing him speak in person.</description>
+    </item>
+    
+    <item>
+      <title>School choice via U-Haul</title>
+      <link>/school-choice-via-u-haul/</link>
+      <pubDate>Fri, 17 Feb 2017 13:21:00 -0500</pubDate>
+      
+      <guid>/school-choice-via-u-haul/</guid>
+      <description>Earlier this week, Alex Hernandez argued that 43 percent of children in the United States are benefiting from school choice. In The 74, he wrote:
+ School districts assign children to public schools based on where they live. Then, the world’s largest game of musical chairs begins. The families of 24 million students find ways around their forced assignments to get the schools they want for their kids.
+The biggest school choice group is families who move to a new neighborhood to change their assigned school.</description>
+    </item>
+    
+    <item>
+      <title>How to create a free distributed data collection &#34;app&#34; with R and Google Sheets</title>
+      <link>/how-to-create-a-free-distributed-data-collection-app-with-r-and-google-sheets/</link>
+      <pubDate>Mon, 29 Aug 2016 06:20:00 -0500</pubDate>
+      
+      <guid>/how-to-create-a-free-distributed-data-collection-app-with-r-and-google-sheets/</guid>
+      <description>A really neat concept that reminds me of my time tracking method:
+ Jenny Bryan, developer of the google sheets R package, gave a talk at Use2015 about the package.
+One of the things that got me most excited about the package was an example she gave in her talk of using the Google Sheets package for data collection at ultimate frisbee tournaments. One reason is that I used to play a little ultimate back in the day.</description>
+    </item>
+    
+    <item>
+      <title>More data please</title>
+      <link>/more-data-please/</link>
+      <pubDate>Tue, 12 May 2015 17:30:00 -0500</pubDate>
+      
+      <guid>/more-data-please/</guid>
+      <description>Two weeks ago, Rob Stellar wrote about the low rate of college completion among Hartford Public School graduates on TrendCT. More importantly, he raised some important questions that may better explain what&amp;rsquo;s going on here:
+ &amp;ldquo;What is preventing so many students who graduate high school from enrolling in college? Is it for financial reasons or lack of access to other resources/college prep programs? How well do Hartford high schools prepare students for college?</description>
+    </item>
+    
+    <item>
+      <title>Data analysis on the go</title>
+      <link>/data-analysis-on-the-go/</link>
+      <pubDate>Sun, 22 Mar 2015 17:30:00 -0500</pubDate>
+      
+      <guid>/data-analysis-on-the-go/</guid>
+      <description>A recent Fast Company article describes Tableau&amp;rsquo;s latest app, Project Elastic, as a potential game-changer in mobile data analysis. The app would allow iPad users to move from an Excel file in Mail.app to an interactive chart with a few quick taps. Filters can be applied/removed with swipes, zoom levels are adjusted by pinch/spread gestures, and charts can be shared via email.
+It&amp;rsquo;s a cleverly designed interface, but Elastic suffers from a critical problem: it assumes the user is accessing clean datasets.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Technology on @alspur</title>
+    <link>/tags/technology/</link>
+    <description>Recent content in Technology on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Aug 2016 06:15:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/technology/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Aggregation Theory and Education</title>
+      <link>/aggregation-theory-and-education/</link>
+      <pubDate>Mon, 15 Aug 2016 06:15:00 -0500</pubDate>
+      
+      <guid>/aggregation-theory-and-education/</guid>
+      <description>Five years ago, Marc Andressen took to the pages of the Wall Street Journal to describe how software was &amp;ldquo;eating the world&amp;rdquo;:
+ &amp;ldquo;More and more major businesses and industries are being run on software and delivered as online services—from movies to agriculture to national defense. Many of the winners are Silicon Valley-style entrepreneurial technology companies that are invading and overturning established industry structures. Over the next 10 years, I expect many more industries to be disrupted by software, with new world-beating Silicon Valley companies doing the disruption in more cases than not.</description>
+    </item>
+    
+    <item>
+      <title>Tinkering</title>
+      <link>/tinkering/</link>
+      <pubDate>Wed, 10 Aug 2016 09:18:00 -0500</pubDate>
+      
+      <guid>/tinkering/</guid>
+      <description>The most recent episode of Mad Dogs &amp;amp; Englishmen1 starts off with a discussion of buying and assembling and AR-15 from scratch. It&amp;rsquo;s an interesting process, but the conversation took an even more interesting turn as they focused on the decline of a tinkering ethos in our society.
+The machines and devices we use are often too complex to repair, disassemble, or customize. If you open the hood of your car, you won&amp;rsquo;t be able to see or even access many of the most critical parts - you&amp;rsquo;ll most likely see a series of injection-molded plastic meant to not only protect but to discourage amateur tinkering.</description>
+    </item>
+    
+  </channel>
+</rss>

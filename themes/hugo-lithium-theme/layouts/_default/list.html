@@ -1,0 +1,51 @@
+{{ partial "header.html" . }}
+
+<main class="content" role="main">
+
+    {{ range  (first 5 (where .Data.Pages "Section" "post")).GroupByDate "January 1, 2006" }}
+    
+     <h2 class="archive-title">{{ .Key }}</h2>
+
+    {{ range .Pages }}
+    <article class="article">
+      <a href="{{ .RelPermalink }}" class="archive-item-link">{{ .Title }}</a>
+      
+      {{ if .Params.link }}
+      
+      <!-- Need to go through and add all the permutations of 
+           icons that I have on my current site -->
+      
+      {{ if in .Params.link "overcast" }} 
+      
+      <a href = "{{ .Params.link }}"><font color="3c3e40"><i class="fa fa-rss" 
+      title="directlink"></i></a></font>
+      
+      {{ else if in .Params.link "amazon" }}
+      
+      <a href = "{{ .Params.link }}"><font color="3c3e40"><i class="fa fa-book" 
+      title="directlink"></i></a></font>
+      
+      {{ else  }}
+      
+      <a href = "{{ .Params.link }}"><font color="3c3e40"><i class="fa fa-link" 
+      title="directlink"></i></a></font>
+      
+     {{ end }}
+      
+     {{end}} 
+     
+     <div class="article-content">
+        
+     {{ .Content }}
+      
+    </div>
+      </article> 
+      <hr>
+    {{ end }}
+    {{ end }}
+    
+    
+    
+</main>
+
+{{ partial "footer.html" . }}

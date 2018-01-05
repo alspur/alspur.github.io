@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Book Notes on @alspur</title>
+    <link>/tags/book-notes/</link>
+    <description>Recent content in Book Notes on @alspur</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Oct 2016 06:40:00 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/book-notes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Book Notes - Why Knowledge Matters</title>
+      <link>/book-notes---why-knowledge-matters/</link>
+      <pubDate>Fri, 07 Oct 2016 06:40:00 -0500</pubDate>
+      
+      <guid>/book-notes---why-knowledge-matters/</guid>
+      <description>E.D. Hirsch is a self-described &amp;ldquo;hedgehog,&amp;rdquo; viewing the world through the lens of one big idea:
+ &amp;ldquo;[T]he achievement gap is chiefly a knowledge gap and a language gap. It can be greatly ameliorated by knowledge-based schooling.&amp;rdquo;
+ The inverse of Hirsch&amp;rsquo;s &amp;ldquo;big idea&amp;rdquo; is the skills-based approach to education that drives instruction in the vast majority of American schools. The Schools We Need &amp;amp; Why We Don&amp;rsquo;t Have Them&amp;rdquo; was my first introduction to the &amp;ldquo;knowledge vs.</description>
+    </item>
+    
+    <item>
+      <title>Book Notes - The Checklist Manifesto</title>
+      <link>/book-notes---the-checklist-manifesto/</link>
+      <pubDate>Thu, 11 Aug 2016 06:43:00 -0500</pubDate>
+      
+      <guid>/book-notes---the-checklist-manifesto/</guid>
+      <description>Books have always been important to me. My grandmother was a librarian and as she babysat me, I was able to spend hundreds, if not thousands, of hours searching, consuming, and falling in love with books. That passion continues today, but I find that I have less time to devote to extended, deep periods of reading.
+I&amp;rsquo;m going to follow CGP Grey&amp;rsquo;s lead and start publicly sharing notes on books I&amp;rsquo;ve read.</description>
+    </item>
+    
+  </channel>
+</rss>
